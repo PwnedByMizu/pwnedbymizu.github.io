@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio CTF | 0xMizu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
+                <a href="images/Mizu.png" class="logo">0xMizu</a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link active">Accueil</a>
+                    <a href="#writeups" class="nav-link">Writeups</a>
+                    <a href="#about" class="nav-link">À propos</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <h1 class="hero-title">Je suis <span class="text-gradient">0xMizu </span></h1>
+                <p class="hero-subtitle">Spécialiste en cybersécurité et passionné par les CTFs</p>
+                <a href="#writeups" class="hero-cta">Voir mes writeups</a>
+            </section>
+
+            <section id="writeups" class="section">
+                <h2 class="section-title">Mes Writeups</h2>
+                <div class="writeups-filters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="thm">TryHackMe</button>
+                    <button class="filter-btn" data-filter="htb">HackTheBox</button>
+                    <button class="filter-btn" data-filter="post">Posts</button>
+                </div>
+                
+                <div class="writeups-grid">
+                    <!-- Writeup Card - Smag Grotto -->
+                    <article class="writeup-card" data-category="thm">
+                        <div class="card-content">
+                            <span class="card-platform thm">TryHackMe</span>
+                            <h3 class="card-title"><a href="writeups/smag-grotto.html">Smag Grotto</a></h3>
+                            <p class="card-excerpt">Exploitation d'une machine Linux via faille web et élévation de privilèges via APT.</p>
+                            <div class="card-meta">
+                                <span class="meta-date">Mars 2025</span>
+                                <span class="meta-difficulty easy">Facile</span>
+                            </div>
+                            <div class="card-tags">
+                                <span class="tag">Web</span>
+                                <span class="tag">Linux</span>
+                                <span class="tag">PrivEsc</span>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Writeup Card - Rootme -->
+                    <article class="writeup-card" data-category="thm">
+                        <div class="card-content">
+                            <span class="card-platform thm">TryHackMe</span>
+                            <h3 class="card-title"><a href="rootme.html">Rootme</a></h3>
+                            <p class="card-excerpt">Exploitation d'une machine Linux via faille web et élévation de privilèges via APT.</p>
+                            <div class="card-meta">
+                                <span class="meta-date">Mars 2025</span>
+                                <span class="meta-difficulty easy">Facile</span>
+                            </div>
+                            <div class="card-tags">
+                                <span class="tag">Web</span>
+                                <span class="tag">Linux</span>
+                                <span class="tag">PrivEsc</span>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="writeup-card" data-category="thm">
+                        <div class="card-content">
+                            <span class="card-platform thm">TryHackMe</span>
+                            <h3 class="card-title"><a href="mrrobot.html">Mr Robot</a></h3>
+                            <p class="card-excerpt">Exploitation d'une machine Linux via faille web et élévation de privilèges via APT.</p>
+                            <div class="card-meta">
+                                <span class="meta-date">Mars 2025</span>
+                                <span class="meta-difficulty easy">medium</span>
+                            </div>
+                            <div class="card-tags">
+                                <span class="tag">Web</span>
+                                <span class="tag">Linux</span>
+                                <span class="tag">PrivEsc</span>
+                            </div>
+                        </div>
+                    </article>
+
+
+                </div>
+            
+            <section id="about" class="section">
+                <h2 class="section-title">À Propos de Moi</h2>
+                <div class="about-grid">
+                    <div class="about-content">
+                        <p>Salut Moi c'est Adam aka Mizu je me presente rapidement:</p>
+                        <p>je suis un etudient en cybersecurité en terminale generale et j'apprend la cybersecurité en autodidacte depuis 2ans ce qui ma permis d'acquerir plusieurs competence</p>
+                        <p>je pense bientot lancé un nouveau defi sur ma nouvelle chaine tik tok et youtube alors n'hesitez a me rejoindre grace a mes contact un peu en bas.</p>
+                        <p>Ce Portfolio a pour but de vous montrer de quoi je suis capable notamment en ctf. </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/Mizu.png" alt="Votre photo de profil" class="profile-img">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nouvelle Section Compétences -->
+            <section id="skills" class="section">
+                <h2 class="section-title">Mes Compétences</h2>
+                
+                <div class="skills-grid">
+                    <!-- Langages -->
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">
+                            <svg class="skills-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            Langages
+                        </h3>
+                        <div class="skills-items">
+                            <div class="skill-item">
+                                <img src="assets/icons/python.svg" alt="" class="skill-icon">
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/javascript.svg" alt="" class="skill-icon">
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/cplusplus.svg" alt="" class="skill-icon">
+                                <span>C++</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/gnubash.svg" alt="" class="skill-icon">
+                                <span>Bash</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/html5.svg" alt="" class="skill-icon">
+                                <span>HTML/CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outils Sécurité -->
+                    <div class="skills-category">
+                        <h3 class="skills-category-title">
+                            <svg class="skills-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Outils Sécurité
+                        </h3>
+                        <div class="skills-items">
+                            <div class="skill-item">
+                                <img src="assets/icons/linux.svg" alt="" class="skill-icon">
+                                <span>Linux</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/burpsuite.svg" alt="" class="skill-icon">
+                                <span>Burp Suite</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/wireshark.svg" alt="" class="skill-icon">
+                                <span>Wireshark</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/metasploit.svg" alt="" class="skill-icon">
+                                <span>Metasploit</span>
+                            </div>
+                            <div class="skill-item">
+                                <img src="assets/icons/kalilinux.svg" alt="" class="skill-icon">
+                                <span>Kali & ses outils</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+<!-- Section Projets mise à jour -->
+            <section id="projects" class="section">
+    <h2 class="section-title">Mes Projets</h2>
+    
+    <div class="projects-filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="security">Sécurité</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="tool">Outils</button>
+    </div>
+    
+    <div class="projects-grid">
+        <!-- Projet 1 -->
+        <article class="project-card" data-category="security tool">
+            <div class="card-content">
+                <div class="card-platform">
+                    <img src="assets/icons/github.svg" alt="GitHub" class="platform-icon">
+                    <span>GitHub</span>
+                </div>
+                <h3 class="card-title">CTF Toolkit</h3>
+                <p class="card-excerpt">Collection de scripts Python pour automatiser les tâches courantes en CTF</p>
+                <div class="card-meta">
+                    <span class="meta-date">2023</span>
+                    <span class="meta-status completed">Complété</span>
+                </div>
+                <div class="card-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">Automation</span>
+                </div>
+                <div class="card-actions">
+                    <a href="#" class="action-btn code" target="_blank">
+                        <img src="assets/icons/github.svg" alt="Code">
+                        Voir le code
+                    </a>
+                    <a href="#" class="action-btn demo" target="_blank">
+                        <img src="assets/icons/external-link.svg" alt="Demo">
+                        Voir la demo
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Projet 2 -->
+        <article class="project-card" data-category="security web">
+            <div class="card-content">
+                <div class="card-platform">
+                    <img src="assets/icons/github.svg" alt="GitHub" class="platform-icon">
+                    <span>GitHub</span>
+                </div>
+                <h3 class="card-title">Vulnerability Scanner</h3>
+                <p class="card-excerpt">Scanner de vulnérabilités web avec détection XSS/SQLi</p>
+                <div class="card-meta">
+                    <span class="meta-date">2024</span>
+                    <span class="meta-status ongoing">En développement</span>
+                </div>
+                <div class="card-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">OWASP</span>
+                    <span class="tag">Nmap</span>
+                </div>
+                <div class="card-actions">
+                    <a href="#" class="action-btn code" target="_blank">
+                        <img src="assets/icons/github.svg" alt="Code">
+                        Voir le code
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Projet 3 -->
+        <article class="project-card" data-category="tool">
+            <div class="card-content">
+                <div class="card-platform">
+                    <img src="assets/icons/gitbook.svg" alt="Documentation" class="platform-icon">
+                    <span>Documentation</span>
+                </div>
+                <h3 class="card-title">CTF Writeups</h3>
+                <p class="card-excerpt">Collection de writeups détaillés avec méthodologies</p>
+                <div class="card-meta">
+                    <span class="meta-date">2022-2025</span>
+                    <span class="meta-status ongoing">Maintenu</span>
+                </div>
+                <div class="card-tags">
+                    <span class="tag">Markdown</span>
+                    <span class="tag">HTML/CSS</span>
+                </div>
+                <div class="card-actions">
+                    <a href="#" class="action-btn demo" target="_blank">
+                        <img src="assets/icons/external-link.svg" alt="Demo">
+                        Lire les writeups
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+            </section>
+
+<!-- Section Contact mise à jour -->
+<section id="contact" class="section">
+    <h2 class="section-title">Me Contacter</h2>
+    
+    <div class="contact-grid">
+        <div class="contact-card">
+            <div class="contact-icon">
+                <img src="assets/icons/gmail.svg" alt="Email">
+            </div>
+            <h3>Email</h3>
+            <p>Pour les collaborations professionnelles</p>
+            <a href="mailto:contact@0xmizu.com" class="contact-link">
+                contact@0xmizu.com
+            </a>
+        </div>
+
+        <!-- Carte Réseaux -->
+        <div class="contact-card">
+            <div class="contact-icon">
+                <img src="assets/icons/searxng.svg" alt="Réseaux">
+            </div>
+            <h3>Réseaux Sociaux</h3>
+            <p>Suivez mon activité</p>
+            <div class="social-links">
+                <a href="https://github.com/0xmizu" target="_blank" class="social-link">
+                    <img src="assets/icons/github.svg" alt="GitHub">
+                </a>
+                <a href="#" target="_blank" class="social-link">
+                    <img src="assets/icons/tiktok.svg" alt="Tiktok">
+                </a>
+                <a href="https://twitter.com/0xmizu" target="_blank" class="social-link">
+                    <img src="assets/icons/x.svg" alt="Twitter">
+                </a>
+                <a href="https://youtube.com/@0xmizu" target="_blank" class="social-link">
+                    <img src="assets/icons/youtube.svg" alt="YouTube">
+                </a>
+                <a href="https://discord.gg/invite/0xmizu" target="_blank" class="social-link">
+                    <img src="assets/icons/discord.svg" alt="Discord">
+                </a>
+            </div>
+        </div>
+
+        <!-- Carte Support -->
+        <div class="contact-card">
+            <div class="contact-icon">
+                <img src="assets/icons/helpdesk.svg" alt="Support">
+            </div>
+            <h3>Support</h3>
+            <p>Si vous appréciez mon travail</p>
+            <a href="https://buymeacoffee.com/0xmizu" target="_blank" class="contact-link">
+                <img src="assets/icons/buymeacoffee.svg" alt="">
+                Buy Me a Coffee
+            </a>
+        </div>
+    </div>
+</section>
+
+
+        </main>
+
+        <footer id="contact" class="footer">
+
+            
+            <p class="copyright">© 2022-2025 0xMizu. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

